@@ -1,13 +1,13 @@
 #include<stdio.h>
-int Num_Pyramid_Base[3][150];//ÓÃÀ´±£´æ¸ß½ğ×ÖËş¡¢µÍÅ¼Êı½ğ×ÖËş¡¢µÍÆæÊı½ğ×ÖËşµÄËùÓĞ²ãÊıËùÊ¹ÓÃµ½µÄ·½¿éÊı
-int Max_Base[3];//ÓÃÀ´±£´æÈıÖÖ½ğ×ÖËşÔÚ¸ø¶¨µÄ×î´ó·½¿éÊıÏÂµÄ×î´óbase
-char Current_Pyramid_Sort[3];//±£´æµ±Ç°½ğ×ÖËşµÄÖÖÀà
-int Depth; //È«¾ÖÉî¶È
-int Num_Cube; //±£´æ¶ÁÈëµÄ·½¿éÊı
-int Save_Base[10];  //±£´æ·ûºÏÌõ¼şµÄ½ğ×ÖËşµÄbase
-int Save_Pyramid_No[10]; //±£´æ·ûºÏÌõ¼şµÄ½ğ×ÖËşµÄÖÖÀà±àºÅ
-bool flag_complete;  //Ñ°ÕÒÍê³ÉµÄ±êÖ¾
-bool read_cube() //¶ÁÈë·½¿éÊı
+int Num_Pyramid_Base[3][150];//ç”¨æ¥ä¿å­˜é«˜é‡‘å­—å¡”ã€ä½å¶æ•°é‡‘å­—å¡”ã€ä½å¥‡æ•°é‡‘å­—å¡”çš„æ‰€æœ‰å±‚æ•°æ‰€ä½¿ç”¨åˆ°çš„æ–¹å—æ•°
+int Max_Base[3];//ç”¨æ¥ä¿å­˜ä¸‰ç§é‡‘å­—å¡”åœ¨ç»™å®šçš„æœ€å¤§æ–¹å—æ•°ä¸‹çš„æœ€å¤§base
+char Current_Pyramid_Sort[3];//ä¿å­˜å½“å‰é‡‘å­—å¡”çš„ç§ç±»
+int Depth; //å…¨å±€æ·±åº¦
+int Num_Cube; //ä¿å­˜è¯»å…¥çš„æ–¹å—æ•°
+int Save_Base[10];  //ä¿å­˜ç¬¦åˆæ¡ä»¶çš„é‡‘å­—å¡”çš„base
+int Save_Pyramid_No[10]; //ä¿å­˜ç¬¦åˆæ¡ä»¶çš„é‡‘å­—å¡”çš„ç§ç±»ç¼–å·
+bool flag_complete;  //å¯»æ‰¾å®Œæˆçš„æ ‡å¿—
+bool read_cube() //è¯»å…¥æ–¹å—æ•°
 {
 	scanf_s("%d", &Num_Cube);
 	if (Num_Cube == 0)
@@ -16,13 +16,13 @@ bool read_cube() //¶ÁÈë·½¿éÊı
 	return true;
 }
 /*
-º¯ÊıÃû£ºDBF_Search
-¹¦ÄÜ£ºÀûÓÃÉî¶ÈÓÅÏÈ±éÀú£¬½áºÏ¹ã¶È±éÀúËÑË÷·ûºÏÌõ¼şµÄ½ğ×ÖËş
-Current_cube_num£ºµ±Ç°¿ÉÊ¹ÓÃµÄ·½¿éÊı
-Current_Depth£ºµ±Ç°¿ÉÊ¹ÓÃÉî¶È
-Max_Base0£ºµ±Ç°¸ß½ğ×ÖËşµÄ×î´óËÑË÷base
-Max_Base1£ºµ±Ç°µÍÆæÊı½ğ×ÖËşµÄ×î´óËÑË÷base
-Max_Base2£ºµ±Ç°µÍÅ¼Êı½ğ×ÖËşµÄ×î´óËÑË÷base
+å‡½æ•°åï¼šDBF_Search
+åŠŸèƒ½ï¼šåˆ©ç”¨æ·±åº¦ä¼˜å…ˆéå†ï¼Œç»“åˆå¹¿åº¦éå†æœç´¢ç¬¦åˆæ¡ä»¶çš„é‡‘å­—å¡”
+Current_cube_numï¼šå½“å‰å¯ä½¿ç”¨çš„æ–¹å—æ•°
+Current_Depthï¼šå½“å‰å¯ä½¿ç”¨æ·±åº¦
+Max_Base0ï¼šå½“å‰é«˜é‡‘å­—å¡”çš„æœ€å¤§æœç´¢base
+Max_Base1ï¼šå½“å‰ä½å¥‡æ•°é‡‘å­—å¡”çš„æœ€å¤§æœç´¢base
+Max_Base2ï¼šå½“å‰ä½å¶æ•°é‡‘å­—å¡”çš„æœ€å¤§æœç´¢base
 */
 void DBF_Search(int Current_cube_num, int Current_Depth, int Max_Base0, int Max_Base1, int Max_Base2)	
 {
@@ -33,10 +33,10 @@ void DBF_Search(int Current_cube_num, int Current_Depth, int Max_Base0, int Max_
 	}
 	for (int temp0 = Max_Base0, temp1 = Max_Base1, temp2 = Max_Base2; temp0 > 1 || temp1 > 1 || temp2 > 1;)
 	{
-		int Current_Pyramid_No, Current_Base;//current_pyramid_no£ºµ±Ç°½ğ×ÖËşÖÖÀà±àºÅ
-											 //current_base£ºµ±Ç°ÖÖÀà±àºÅµÄ½ğ×ÖËşµÄbase
+		int Current_Pyramid_No, Current_Base;//current_pyramid_noï¼šå½“å‰é‡‘å­—å¡”ç§ç±»ç¼–å·
+											 //current_baseï¼šå½“å‰ç§ç±»ç¼–å·çš„é‡‘å­—å¡”çš„base
 		/*
-		ÕÒ³ö¸ß½ğ×ÖËş¡¢ÆæÊı½ğ×ÖËş¡¢Å¼Êı½ğ×ÖËş¸÷×ÔµÄ×î´óbaseËù¶ÔÓ¦µÄ·½¿éÊıµÄ×î´óÖµ
+		æ‰¾å‡ºé«˜é‡‘å­—å¡”ã€å¥‡æ•°é‡‘å­—å¡”ã€å¶æ•°é‡‘å­—å¡”å„è‡ªçš„æœ€å¤§baseæ‰€å¯¹åº”çš„æ–¹å—æ•°çš„æœ€å¤§å€¼
 		*/
 		if (Num_Pyramid_Base[0][temp0] >= Num_Pyramid_Base[1][temp1] && Num_Pyramid_Base[0][temp0] >= Num_Pyramid_Base[2][temp2])
 		{
@@ -57,9 +57,9 @@ void DBF_Search(int Current_cube_num, int Current_Depth, int Max_Base0, int Max_
 			temp2--;
 		}
 		if (Num_Pyramid_Base[Current_Pyramid_No][Current_Base] * Current_Depth < Current_cube_num)
-			return;																	//µ±ÕÒµ½Ğ¡ÓÚµ±Ç°·½¿éÊı¶ÔÓ¦µÄbaseºó£¬¿ªÊ¼µÚ¶ş¸öÖµµÄ²éÕÒ
+			return;																	//å½“æ‰¾åˆ°å°äºå½“å‰æ–¹å—æ•°å¯¹åº”çš„baseåï¼Œå¼€å§‹ç¬¬äºŒä¸ªå€¼çš„æŸ¥æ‰¾
 		if (Num_Pyramid_Base[Current_Pyramid_No][Current_Base] > Current_cube_num)
-			continue;																//µ±µ±Ç°½ğ×ÖËşbase¶ÔÓ¦µÄ·½¿éÊı´óÓÚµ±Ç°·½¿éÊıÊ±£¬ÖØĞÂÑ°ÕÒ
+			continue;																//å½“å½“å‰é‡‘å­—å¡”baseå¯¹åº”çš„æ–¹å—æ•°å¤§äºå½“å‰æ–¹å—æ•°æ—¶ï¼Œé‡æ–°å¯»æ‰¾
 		Save_Pyramid_No[Depth - Current_Depth + 1] = Current_Pyramid_No;			
 		Save_Base[Depth - Current_Depth + 1] = Current_Base;
 		DBF_Search(Current_cube_num - Num_Pyramid_Base[Current_Pyramid_No][Current_Base], Current_Depth - 1, temp0, temp1, temp2);
@@ -70,12 +70,12 @@ void DBF_Search(int Current_cube_num, int Current_Depth, int Max_Base0, int Max_
 int main()
 {
 	int Case = 0;
-	for (Max_Base[0] = 0; Num_Pyramid_Base[0][Max_Base[0]] <= 100; Max_Base[0]++)
-		Num_Pyramid_Base[0][Max_Base[0] + 1] = Num_Pyramid_Base[0][Max_Base[0]] + (Max_Base[0] + 1) * (Max_Base[0] + 1);				//°ÑMax_Base0²ãµÄ<1000000µÄ¸ßËş´æ½øÊı×é
-	for (Max_Base[1] = 0; Num_Pyramid_Base[1][Max_Base[1]] <= 100; Max_Base[1]++)
-		Num_Pyramid_Base[1][Max_Base[1] + 1] = Num_Pyramid_Base[1][Max_Base[1]] + (Max_Base[1] * 2 + 1) * (Max_Base[1] * 2 + 1);		//½«Max_Base0²ãµÄ¸÷²ã»ùµ×ÆæÊıµÄµÍËş´æ½øÊı×é
-	for (Max_Base[2] = 0; Num_Pyramid_Base[2][Max_Base[2]] <= 100; Max_Base[2]++)
-		Num_Pyramid_Base[2][Max_Base[2] + 1] = Num_Pyramid_Base[2][Max_Base[2]] + (Max_Base[2] + 1) * (Max_Base[2] + 1) * 4;			//½«Max_Base0²ãµÄ¸÷²ã»ùµ×Å¼ÊıµÄµÍËş´æ½øÊı×é
+	for (Max_Base[0] = 0; Num_Pyramid_Base[0][Max_Base[0]] <= 1000000; Max_Base[0]++)
+		Num_Pyramid_Base[0][Max_Base[0] + 1] = Num_Pyramid_Base[0][Max_Base[0]] + (Max_Base[0] + 1) * (Max_Base[0] + 1);				//æŠŠMax_Base0å±‚çš„<1000000çš„é«˜å¡”å­˜è¿›æ•°ç»„
+	for (Max_Base[1] = 0; Num_Pyramid_Base[1][Max_Base[1]] <= 1000000; Max_Base[1]++)
+		Num_Pyramid_Base[1][Max_Base[1] + 1] = Num_Pyramid_Base[1][Max_Base[1]] + (Max_Base[1] * 2 + 1) * (Max_Base[1] * 2 + 1);		//å°†Max_Base0å±‚çš„å„å±‚åŸºåº•å¥‡æ•°çš„ä½å¡”å­˜è¿›æ•°ç»„
+	for (Max_Base[2] = 0; Num_Pyramid_Base[2][Max_Base[2]] <= 1000000; Max_Base[2]++)
+		Num_Pyramid_Base[2][Max_Base[2] + 1] = Num_Pyramid_Base[2][Max_Base[2]] + (Max_Base[2] + 1) * (Max_Base[2] + 1) * 4;			//å°†Max_Base0å±‚çš„å„å±‚åŸºåº•å¶æ•°çš„ä½å¡”å­˜è¿›æ•°ç»„
 	Current_Pyramid_Sort[0] = 'H';
 	Current_Pyramid_Sort[1] = Current_Pyramid_Sort[2] = 'L';
 	while (read_cube())
